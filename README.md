@@ -1,4 +1,4 @@
-# shukawam/me/api
+# gin-api
 
 This is a simple API server built with Go and the Gin framework.
 
