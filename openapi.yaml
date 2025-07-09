@@ -1,0 +1,37 @@
+openapi: 3.0.0
+info:
+  title: gin-api
+  description: A simple API server using the Gin framework.
+  version: 1.0.0
+paths:
+  /ping:
+    get:
+      summary: Server health check
+      description: Returns a simple "pong" to indicate that the server is running.
+      responses:
+        '200':
+          description: Successful response
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: pong
+  /sleep:
+    get:
+      summary: Sleeps for 120 seconds
+      description: A long-running endpoint that waits for 120 seconds before responding.
+      responses:
+        '200':
+          description: Successful response after sleeping
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: enough sleep?
+  /error:
+    get:
+      summary: Triggers a server error
+      description: This endpoint intentionally causes a panic to test error handling.
+      responses:
+        '500':
+          description: Internal Server Error
