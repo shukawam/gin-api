@@ -14,7 +14,7 @@ func main() {
 			ctx.String(http.StatusOK, "pong")
 		}).
 		GET("/sleep", func(ctx *gin.Context) {
-			time.Sleep(30 * time.Second)
+			time.Sleep(45 * time.Second)
 			ctx.String(http.StatusOK, "enough sleep?")
 		}).
 		GET("/error", func(ctx *gin.Context) {
