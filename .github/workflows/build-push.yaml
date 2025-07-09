@@ -28,5 +28,5 @@ jobs:
         run: |
           docker buildx build \
             --platform linux/amd64,linux/arm64 \
-            -t ${{ env.DOCKER_USERNAME }}/gin-api:${{ github.sha }} \
+            -t ${{ secrets.DOCKERHUB_USERNAME }}/gin-api:${{ github.sha }} \
             --push .
