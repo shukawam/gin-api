@@ -30,4 +30,6 @@ jobs:
           context: .
           platforms: linux/amd64,linux/arm64
           push: true
-          tags: shuheikawamura243/gin-demo-api:${{ github.sha }}
+          tags: |
+            shuheikawamura243/gin-api:latest
+            shuheikawamura243/gin-api:${{ github.sha }}
