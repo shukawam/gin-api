@@ -6,6 +6,7 @@ on:
       - main
     paths:
       - openapi.yaml
+  workflow_dispatch:
 
 jobs:
   sync-gateway-setting:
@@ -31,4 +32,4 @@ jobs:
         run: |
           deck gateway sync kong.yaml \
             --konnect-token ${{ secrets.KONNECT_TOKEN }} \
-            --konnect-control-plane-name ${{ secrets.KONNECT_CPMTROL_PLANE_NAME }}
+            --konnect-control-plane-name ${{ secrets.KONNECT_CONTROL_PLANE_NAME }}
