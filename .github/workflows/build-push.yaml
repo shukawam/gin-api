@@ -25,8 +25,11 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Build and push
-        run: |
-          docker buildx build \
-            --platform linux/amd64,linux/arm64 \
-            -t ${{ secrets.DOCKERHUB_USERNAME }}/gin-api:${{ github.sha }} \
-            --push .
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          platforms: linux/amd64,linux/arm64
+          push: true
+          tags: |
+            shuheikawamura243/gin-api:latest
+            shuheikawamura243/gin-api:${{ github.sha }}
