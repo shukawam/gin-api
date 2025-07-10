@@ -3,13 +3,16 @@ info:
   title: gin-api
   description: A simple API server using the Gin framework.
   version: 1.0.0
+servers:
+  - url: https://api.shukawam.me
 paths:
   /ping:
     get:
+      operationId: /ping
       summary: Server health check
       description: Returns a simple "pong" to indicate that the server is running.
       responses:
-        '200':
+        "200":
           description: Successful response
           content:
             text/plain:
@@ -18,10 +21,11 @@ paths:
                 example: pong
   /sleep:
     get:
+      operationId: /sleep
       summary: Sleeps for 45 seconds
       description: A long-running endpoint that waits for 45 seconds before responding.
       responses:
-        '200':
+        "200":
           description: Successful response after sleeping
           content:
             text/plain:
@@ -30,8 +34,9 @@ paths:
                 example: enough sleep?
   /error:
     get:
+      operationId: /error
       summary: Triggers a server error
       description: This endpoint intentionally causes a panic to test error handling.
       responses:
-        '500':
+        "500":
           description: Internal Server Error
