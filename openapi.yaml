@@ -18,8 +18,8 @@ paths:
                 example: pong
   /sleep:
     get:
-      summary: Sleeps for 120 seconds
-      description: A long-running endpoint that waits for 120 seconds before responding.
+      summary: Sleeps for 45 seconds
+      description: A long-running endpoint that waits for 45 seconds before responding.
       responses:
         '200':
           description: Successful response after sleeping
