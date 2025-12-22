@@ -16,7 +16,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
       - name: Setup inso cli
-        uses: kong/setup-inso@v2
+        uses: kong/setup-inso@v2.1.0
         with:
           inso-version: 11.0.0
           compression: tar.xz
