@@ -3,14 +3,23 @@ info:
   title: gin-api
   description: A simple API server using the Gin framework.
   version: 1.0.0
+  contact:
+    name: shukawam
 servers:
+  - url: http://localhost:8080
+    description: Local development environment
   - url: https://api.shukawam.me
+    description: Production environment
+tags:
+  - name: local
 paths:
   /ping:
     get:
       operationId: /ping
       summary: Server health check
       description: Returns a simple "pong" to indicate that the server is running.
+      tags:
+        - local
       responses:
         "200":
           description: Successful response
@@ -24,6 +33,8 @@ paths:
       operationId: /sleep
       summary: Sleeps for 45 seconds
       description: A long-running endpoint that waits for 45 seconds before responding.
+      tags:
+        - local
       responses:
         "200":
           description: Successful response after sleeping
@@ -37,6 +48,8 @@ paths:
       operationId: /error
       summary: Triggers a server error
       description: This endpoint intentionally causes a panic to test error handling.
+      tags:
+        - local
       responses:
         "500":
           description: Internal Server Error

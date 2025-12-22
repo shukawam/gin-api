@@ -6,29 +6,58 @@ on:
       - main
     paths:
       - openapi.yaml
+      - .github/workflows/sync-gateway-setting.yaml
   workflow_dispatch:
 
 jobs:
   sync-gateway-setting:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: shukawam/setup-inso@v2
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Setup inso cli
+        uses: kong/setup-inso@v2
         with:
-          inso-version: 11.2.0
+          inso-version: 11.0.0
           compression: tar.xz
-      - uses: kong/setup-deck@v1
+      - name: Setup deck
+        uses: kong/setup-deck@v1
         with:
-          deck-version: 1.49.0
-      - name: lint openapi spec
+          deck-version: 1.54.0
+      - name: Dump current setting
+        run: |
+          deck gateway dump -o dump.yaml \
+            --select-tag local \
+            --skip-defaults \
+            --konnect-token ${{ secrets.KONNECT_TOKEN }} \
+            --konnect-control-plane-name ${{ secrets.KONNECT_CONTROL_PLANE_NAME }}
+          cat dump.yaml
+      - name: Backup dumped setting
+        uses: actions/upload-artifact@v5
+        with:
+          name: dump
+          path: dump.yaml
+      - name: Lint openapi spec
         run: |
           inso lint spec openapi.yaml
-      - name: convert openapi spec to 
+      - name: Convert openapi spec to deck format
         run: |
           deck file openapi2kong \
             -s openapi.yaml \
             -o kong.yaml
-      - name: sync gateway settings
+          cat kong.yaml
+      - name: Backup kong.yaml
+        uses: actions/upload-artifact@v5
+        with:
+          name: backup
+          path: kong.yaml
+      - name: Diff current settings
+        run: |
+          deck gateway diff kong.yaml \
+            --select-tag local
+            --konnect-token ${{ secrets.KONNECT_TOKEN }} \
+            --konnect-control-plane-name ${{ secrets.KONNECT_CONTROL_PLANE_NAME }}
+      - name: Sync gateway settings
         run: |
           deck gateway sync kong.yaml \
             --konnect-token ${{ secrets.KONNECT_TOKEN }} \
