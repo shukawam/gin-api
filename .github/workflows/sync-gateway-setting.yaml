@@ -16,9 +16,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
       - name: Setup inso cli
-        uses: kong/setup-inso@33b1006a5c2ae15364fc18146ec900b7db3c675e # v2.1.0
+        uses: shukawam/setup-inso@v2
         with:
-          inso-version: 11.0.0
+          inso-version: 11.2.0
           compression: tar.xz
       - name: Setup deck
         uses: kong/setup-deck@v1
