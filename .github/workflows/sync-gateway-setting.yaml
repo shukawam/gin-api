@@ -54,7 +54,7 @@ jobs:
       - name: Diff current settings
         run: |
           deck gateway diff kong.yaml \
-            --select-tag local
+            --select-tag local \
             --konnect-token ${{ secrets.KONNECT_TOKEN }} \
             --konnect-control-plane-name ${{ secrets.KONNECT_CONTROL_PLANE_NAME }}
       - name: Sync gateway settings
