@@ -8,8 +8,6 @@ info:
 servers:
   - url: http://localhost:8080
     description: Local development environment
-  - url: https://api.shukawam.me
-    description: Production environment
 tags:
   - name: local
 paths:
